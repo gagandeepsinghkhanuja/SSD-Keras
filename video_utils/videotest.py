@@ -63,7 +63,7 @@ class VideoTest(object):
             col = (int(cvcol[0][0][0]), int(cvcol[0][0][1]), int(cvcol[0][0][2]))
             self.class_colors.append(col) 
         
-    def run(self, video_path = 0, start_frame = 0, conf_thresh = 0.6):
+    def run(self, video_path = "/content/SSD-Keras/", start_frame = 0, conf_thresh = 0.6):
         """ Runs the test on a video (or webcam)
         
         # Arguments
@@ -78,17 +78,16 @@ class VideoTest(object):
                      are not visualized.
                     
         """
-    
+        print(video_path)
         vid = cv2.VideoCapture(video_path)
         if not vid.isOpened():
             raise IOError(("Couldn't open video file or webcam. If you're "
             "trying to open a webcam, make sure you video_path is an integer!"))
         
-        # Compute aspect ratio of video   
-	
-	skv=skvideo.io.VideoCapture(video_path)
+        # Compute aspect ratio of video
+        skv=skvideo.io.VideoCapture(video_path)
         vidar = float(skv.width)/skv.height
-	vidaz = float(skv.height)/self.input_shape[0]
+        vidaz = float(skv.height)/self.input_shape[0]
 	
         
         # Skip frames until reaching start_frame
@@ -178,8 +177,7 @@ class VideoTest(object):
             # Draw FPS in top left corner
             cv2.rectangle(to_draw, (0,0), (50, 17), (255,255,255), -1)
             cv2.putText(to_draw, fps, (3,10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0,0,0), 1)
-            
-	    cv2.imshow("SSD result", to_draw)
+            cv2.imshow("SSD result", to_draw)
             cv2.waitKey(1)
             
         
