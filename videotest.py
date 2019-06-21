@@ -13,6 +13,7 @@ from random import shuffle
 from scipy.misc import imread, imresize
 from timeit import default_timer as timer
 
+import os
 import sys
 sys.path.append("..")
 from ssd_utils import BBoxUtility
@@ -78,6 +79,9 @@ class VideoTest(object):
                      are not visualized.
                     
         """
+        video_name = 'Video1.mp4'
+        # Grab path to current working directory
+        video_path = os.path.join(video_path,video_name)
         print(video_path)
         vid = cv2.VideoCapture(video_path)
         if not vid.isOpened():
